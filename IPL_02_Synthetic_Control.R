@@ -86,7 +86,11 @@ bbl_metrics <- get_league_metrics("bbl", "BBL")
 psl_metrics <- get_league_metrics("psl", "PSL")
 cpl_metrics <- get_league_metrics("cpl", "CPL")
 
-all_leagues <- bind_rows(ipl_metrics, bbl_metrics, psl_metrics, cpl_metrics)
+# merge into one dataframe
+all_leagues <- bind_rows(ipl_metrics, 
+                         bbl_metrics, 
+                         psl_metrics, 
+                         cpl_metrics)
 
 # ---- 2. Wrangle Data ----
 ## Missing years of data (PSL) causes interpolation failures --> dropping that year
@@ -509,10 +513,6 @@ lower_order_allrounder <-
     .groups = "drop"
   )
 
-print(lower_order_allrounder)
-
-# Run these first
-print(lower_order)
 print(lower_order_allrounder)
 
 # Plot A — Strike Rate Pre vs Post by Position
