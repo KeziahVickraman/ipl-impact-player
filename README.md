@@ -26,3 +26,13 @@ Synthetic Control methods.
 
 ## Data
 Ball-by-ball data via `cricketdata` R package (Cricsheet)
+
+## Policy Context
+This analysis is timed to the BCCI's live review of the Impact Player rule,
+announced immediately after IPL 2026. The following sources informed the 
+policy framing:
+
+- [BCCI to review Impact Player rule after IPL 2026 — India Today](https://www.indiatoday.in/sports/cricket/story/ipl-impact-player-rule-to-be-reviewed-bcci-devajit-saikia-2904850-2026-05-02)
+- [Manjrekar, Washington Sundar, Ashutosh Sharma on the Impact Player rule — Sportstar](https://sportstar.thehindu.com/cricket/ipl/ipl-2026-impact-player-rule-ashutosh-washington-dube-sanjay-manjrekar-quotes/article70931888.ece)
+- [Will BCCI change the Impact Player rule? — Odisha TV](https://odishatv.in/sports/ipl-2026-will-bcci-change-impact-player-rule-11792291)
+- [BCCI to review controversial Impact Player rule — LiveMint](https://www.livemint.com/sports/cricket-news/ipl-2026-bcci-to-review-controversial-impact-player-rule-after-end-of-ongoing-season-says-devajit-saikia-11777744679335.html)
