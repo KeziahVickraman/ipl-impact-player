@@ -78,7 +78,7 @@ message(glue("Seasons: {paste(sort(unique(ipl_bbb$season_yr)), collapse=', ')}")
 ###   Build season-level aggregates for DiD                                  ###
 ###--------------------------------------------------------------------------###
 
-# --- 2.1 Run rate per season (batting dominance) ----
+## --- 2.1 Run rate per season (batting dominance) ----
 season_run_rate <-
   ipl_bbb %>%
   filter(!extra_ball) %>%           # exclude wide/no-ball deliveries
@@ -92,7 +92,7 @@ season_run_rate <-
     .groups = "drop"
   )
 
-# --- 2.2 Match-level outcomes (competitive balance) ----
+## --- 2.2 Match-level outcomes (competitive balance) ----
 match_outcomes <-
   ipl_matches %>%
   mutate(
@@ -115,7 +115,7 @@ match_outcomes <-
     .groups = "drop"
   )
 
-# --- 2.3 All-rounder proxy (IMPORTANT) ----
+## --- 2.3 All-rounder proxy (IMPORTANT) ----
 # All-rounders are players who BOTH bat and bowl in the same match
 # Proxy: count of unique bowlers who also appear as striker in same match
 allrounder_usage <-
@@ -143,7 +143,7 @@ message("Season-level aggregates built.")
 ###   SECTION 3: DiD Models                                                  ###
 ###--------------------------------------------------------------------------###
 
-# --- 3.1 Model 1: Run Rate ~ Post ----
+## --- 3.1 Model 1: Run Rate ~ Post ----
 # Simple before/after — does run rate increase post-rule?
 
 model_runrate <- 
@@ -153,21 +153,21 @@ model_runrate <-
 model_runrate_robust <- 
   coeftest(model_runrate, vcov = vcovHC(model_runrate, type = "HC3"))
 
-# --- 3.2 Model 2: Wickets per over ~ Post ----
+## --- 3.2 Model 2: Wickets per over ~ Post ----
 model_wickets <- 
   lm(wickets_per_over ~ post, data = season_run_rate)
 
 model_wickets_robust <- 
   coeftest(model_wickets, vcov = vcovHC(model_wickets, type = "HC3"))
 
-# --- 3.3 Model 3: Match margin ~ Post (competitive balance) ----
+## --- 3.3 Model 3: Match margin ~ Post (competitive balance) ----
 model_margin <- 
   lm(avg_margin ~ post, data = match_outcomes)
 
 model_margin_robust <- 
   coeftest(model_margin, vcov = vcovHC(model_margin, type = "HC3"))
 
-# --- 3.4 Model 4: All-rounder usage ~ Post ----
+## --- 3.4 Model 4: All-rounder usage ~ Post ----
 model_allrounder <- 
   lm(avg_allrounders_per_match ~ post, 
      data = allrounder_usage)
@@ -253,7 +253,7 @@ theme_ipl <- function() {
     )
 }
 
-# --- Fig 1: Run Rate by Season ----
+### --- Fig 1: Run Rate by Season ----
 fig1_runrate <-
   season_run_rate %>%
   ggplot(aes(x = season_yr, y = run_rate, fill = post_factor)) +
@@ -279,7 +279,7 @@ fig1_runrate <-
   theme_ipl() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-# --- Fig 2: Wickets per over by Season ----
+### --- Fig 2: Wickets per over by Season ----
 fig2_wickets <-
   season_run_rate %>%
   ggplot(aes(x = season_yr, y = wickets_per_over, fill = post_factor)) +
@@ -301,7 +301,7 @@ fig2_wickets <-
   theme_ipl() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-# --- Fig 3: Competitive Balance (Match Margins) ----
+### --- Fig 3: Competitive Balance (Match Margins) ----
 fig3_balance <-
   match_outcomes %>%
   mutate(post_factor = factor(post, levels = c(0,1),
@@ -326,7 +326,7 @@ fig3_balance <-
   theme_ipl() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-# --- Fig 4: All-rounder Usage ----
+### --- Fig 4: All-rounder Usage ----
 fig4_allrounders <-
   allrounder_usage %>%
   mutate(post_factor = factor(post, levels = c(0,1),
@@ -353,7 +353,7 @@ fig4_allrounders <-
   theme_ipl() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-# --- Fig 5: Parallel Trends Check ----
+### --- Fig 5: Parallel Trends Check ----
 fig5_parallel <-
   season_run_rate %>%
   ggplot(aes(x = season_yr, y = run_rate, 
