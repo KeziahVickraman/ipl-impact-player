@@ -12,8 +12,7 @@ Synthetic Control methods.
 ## Files
 - `IPL_00_Data_Scoping.R` — data validation across all leagues
 - `IPL_01_Causal_DiD.R` — DiD analysis + visualisations
-- `IPL_02_Synthetic_Control.R` — synthetic control counterfactual
-- `IPL_03_Specialist_Displacement.R` — Manjrekar hypothesis test
+- `IPL_02_Synthetic_Control.R` — synthetic control counterfactual + Manjrekar hypothesis test
 - `context_of_paper.Rmd` — paper context and background for non-cricket audiences
 
 ## Key Findings
