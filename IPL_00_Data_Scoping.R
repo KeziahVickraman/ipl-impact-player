@@ -220,24 +220,10 @@ run_rate_plot +
                "2020/21", as.character(2021:2026))
   )
 
-# ---- 5. Report ----
 ###--------------------------------------------------------------------------###
-###   SECTION 5: Scoping Summary                                             ###
-###--------------------------------------------------------------------------###
-
-message("\n\n========== IPL SCOPING SUMMARY ==========")
-message("Check the following before proceeding:")
-message("1. Are seasons 2008-2024 all present?")
-message("2. Are batter/bowler names available for player-level analysis?")
-message("3. Is there a wicket indicator column?")
-message("4. Is runs_off_bat the right runs column?")
-message("5. Does the run rate plot show a visible shift post-2023?")
-message("==========================================\n")
-
-###--------------------------------------------------------------------------###
-# ---- 6. Save RAM space into hardisk ----
+# ---- 5. Save RAM space into hardisk ----
 save.image("IPL_00_Scoping.RData")
 message("Saved to IPL_00_Scoping.RData")
 
-# ---- 7. Report Dependencies ----
+# ---- 6. Report Dependencies ----
 sessionInfo()
