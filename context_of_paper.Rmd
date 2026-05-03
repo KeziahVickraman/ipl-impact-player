@@ -1,0 +1,65 @@
+###--------------------------------------------------------------------------###
+###   CONTEXT NOTE FOR READER                                                ###
+###   Why the IPL Matters — For Non-Cricket Audiences                        ###
+###--------------------------------------------------------------------------###
+
+# The Indian Premier League (IPL) is the world's most valuable cricket
+# franchise tournament, generating over USD 15 billion in brand value
+# (Duff & Phelps, 2023) and attracting the highest-paid cricketers globally.
+# Established in 2008 by the Board of Control for Cricket in India (BCCI),
+# it operates as a Twenty20 (T20) league — the shortest and most commercially
+# dominant format of the sport, where each team faces exactly 20 overs
+# (120 legal deliveries) per innings.
+
+# WHY IT MATTERS GLOBALLY:
+# ─────────────────────────
+# 1. SCALE: The IPL is the second most-attended sporting league in the world
+#    by average attendance per game, behind only the NFL (ESPN, 2023).
+#    The 2023 IPL final alone drew 130 million television viewers in India.
+
+# 2. FINANCIAL DOMINANCE: Media rights for the 2023–2027 cycle were sold
+#    for USD 6.2 billion — surpassing the per-match value of the English
+#    Premier League. Every major cricket board now models its domestic
+#    T20 league on the IPL structure.
+
+# 3. TALENT CONCENTRATION: All 10 IPL franchises actively recruit from
+#    every cricket-playing nation. Players from Australia (BBL), Pakistan
+#    (PSL), West Indies (CPL), South Africa (SA20) and England (The Hundred)
+#    compete in the IPL — making it the de facto global standard-setter
+#    for T20 cricket strategy, rules, and innovation.
+
+# 4. RULE-MAKING POWER: Because of its financial and cultural dominance,
+#    what the BCCI does in the IPL influences cricket globally. When the
+#    IPL introduced the Impact Player rule in 2023, other leagues immediately
+#    began debating whether to adopt it. The ICC (International Cricket
+#    Council) is watching closely.
+
+# WHY THE IMPACT PLAYER RULE IS A GLOBAL POLICY QUESTION:
+# ─────────────────────────────────────────────────────────
+# The Impact Player rule allows teams to substitute one player mid-match
+# for tactical — not injury — reasons. A team may replace a struggling
+# batter with a specialist, or bring in an extra bowler after assessing
+# match conditions. This is unprecedented in cricket's history and
+# structurally analogous to the designated hitter rule in MLB — a
+# substitution mechanic that fundamentally altered team composition,
+# player valuation, and strategic approach.
+
+# Unlike baseball's DH rule which took decades to be universally adopted,
+# the IPL's global reach means the Impact Player rule could reshape
+# cricket's player development pipeline — specifically the value placed
+# on all-rounders (players who both bat and bowl at a high level) —
+# within a single generation of players.
+
+# The BCCI's post-IPL 2026 review therefore carries implications not just
+# for Indian domestic cricket but for how the next generation of cricketers
+# worldwide are identified, developed, and valued at auction.
+
+# WHAT THIS PAPER CONTRIBUTES:
+# ──────────────────────────────
+# This is the first causal analysis of the Impact Player rule using
+# ball-by-ball data across four T20 leagues (IPL, BBL, PSL, CPL) and
+# four outcome dimensions (run rate, wicket-taking, competitive balance,
+# all-rounder deployment). The timing is deliberate — the BCCI review
+# begins immediately after IPL 2026 concludes, and this paper provides
+# the empirical evidence base that policy discussion currently lacks.
+###--------------------------------------------------------------------------##
