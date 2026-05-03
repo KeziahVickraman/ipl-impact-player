@@ -1,7 +1,6 @@
 ###--------------------------------------------------------------------------###
 ###   IPL Impact Player Study                                                ###
 ###   00 — Data Scoping Script                                               ###
-###   Purpose: Validate IPL data availability before building pipeline       ###
 ###--------------------------------------------------------------------------###
 
 rm(list = ls())

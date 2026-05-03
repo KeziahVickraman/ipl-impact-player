@@ -1,7 +1,7 @@
 ###--------------------------------------------------------------------------###
 ###   IPL Impact Player Rule — Synthetic Control Analysis                    ###
 ###   Script: IPL_02_Synthetic_Control.R                                     ###
-###   Method: Synthetic Control (Abadie et al.)                              ###
+###   Method: Synthetic Control                                              ###
 ###   Treatment: IPL 2023 (Impact Player rule)                               ###
 ###   Donor pool: BBL, PSL, CPL                                              ###
 ###   Outcomes: run_rate, avg_allrounders_per_match                          ###
