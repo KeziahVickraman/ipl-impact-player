@@ -135,6 +135,65 @@ pre_years  <- common_years[common_years < 2023]
 post_years <- common_years[common_years >= 2023]
 donor_ids  <- c(2L, 3L, 4L)
 
+## ---- 2.1 Exploratory Data Analysis ----
+# ---- Parallel Trends Check: IPL vs Donor Leagues (BBL, PSL, CPL) ----
+
+# Taking insrpiration from the UK Brexit e.g
+# A critical assumption before running Synthetic Control is verifying
+# that donor leagues (BBL, PSL, CPL) did NOT adopt the Impact Player
+# rule — they serve as our untreated control group.
+#
+# This plot confirms two things:
+#   (i)  Only IPL shows a sharp acceleration in run rates post-2023
+#        — BBL, CPL and PSL all exhibit modest, gradual increases
+#          consistent with natural T20 evolution, not a rule change
+#   (ii) The post-2023 IPL jump is not a global T20 phenomenon
+#        — it is specific to the one league that adopted the rule
+#
+# Note on PSL: PSL shows a stronger pre-2023 upward trend relative
+# to BBL and CPL. This is reflected in the Synthetic Control weights
+# where PSL receives the highest weight (0.985) — the algorithm
+# correctly identifies PSL as the closest structural match to IPL's
+# pre-treatment run rate trajectory.
+#
+# Taken together, this plot validates our donor pool and provides
+# visual justification for proceeding with Synthetic Control as the
+# primary causal identification strategy.
+
+parallel_by_league <-
+  all_leagues %>%
+  mutate(
+    season_yr = case_when(
+      str_detect(season_yr, "/") ~ as.integer(str_extract(season_yr, "^\\d{4}")),
+      TRUE ~ as.integer(season_yr)
+    )
+  ) %>%
+  filter(season_yr >= 2015, season_yr <= 2025) %>%
+  ggplot(aes(x = season_yr, y = run_rate,
+             color = league, group = league)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  geom_vline(xintercept = 2022.5, linetype = "dashed",
+             color = "black", linewidth = 0.8) +
+  facet_wrap(~league, ncol = 2) +
+  scale_color_manual(values = c("IPL" = "#CE1141",
+                                "BBL" = "#17408B",
+                                "PSL" = "#2E8B57",
+                                "CPL" = "#FF8C00")) +
+  scale_x_continuous(breaks = seq(2015, 2025, by = 2)) +
+  labs(
+    title    = "Run Rate by Season — Each League Separately",
+    subtitle = "Checking post-2023 trend consistency across donor leagues",
+    x = "Season", y = "Run Rate (per over)",
+    color = "League",
+    caption = "Data: Cricsheet via cricketdata R package"
+  ) +
+  theme_ipl() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        legend.position = "none")
+
+print(parallel_by_league)
+
 # ---- 3. Model (Here, Synthetic Control) ----
 ## We determined that impact player DID infact cause some differences -- favour for batsmen relative to bowlers
 ## But also coming at a hidden cost to all-rounders.

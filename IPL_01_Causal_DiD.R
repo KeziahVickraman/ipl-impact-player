@@ -140,67 +140,56 @@ message("Season-level aggregates built.")
 
 # ---- 3. Model ----
 ###--------------------------------------------------------------------------###
-###   SECTION 3: DiD Models                                                  ###
+###   SECTION 3: Average Treatment Effect (ATE) — Simple Before/After        ###
+###   Note: This is a descriptive A-B comparison (IPL pre vs post 2023)      ###
+###   Causal identification comes later via Synthetic Control (Section 5)    ###
 ###--------------------------------------------------------------------------###
-
-## --- 3.1 Model 1: Run Rate ~ Post ----
-# Simple before/after — does run rate increase post-rule?
 
 model_runrate <- 
   lm(run_rate ~ post, data = season_run_rate)
 
-# Robust standard errors (HC3) — important for small N seasons
-model_runrate_robust <- 
-  coeftest(model_runrate, vcov = vcovHC(model_runrate, type = "HC3"))
-
-## --- 3.2 Model 2: Wickets per over ~ Post ----
 model_wickets <- 
   lm(wickets_per_over ~ post, data = season_run_rate)
 
-model_wickets_robust <- 
-  coeftest(model_wickets, vcov = vcovHC(model_wickets, type = "HC3"))
-
-## --- 3.3 Model 3: Match margin ~ Post (competitive balance) ----
 model_margin <- 
   lm(avg_margin ~ post, data = match_outcomes)
 
-model_margin_robust <- 
-  coeftest(model_margin, vcov = vcovHC(model_margin, type = "HC3"))
-
-## --- 3.4 Model 4: All-rounder usage ~ Post ----
 model_allrounder <- 
-  lm(avg_allrounders_per_match ~ post, 
-     data = allrounder_usage)
+  lm(avg_allrounders_per_match ~ post, data = allrounder_usage)
 
-model_allrounder_robust <- 
-  coeftest(model_allrounder, vcov = vcovHC(model_allrounder, type = "HC3"))
-
-# --- Print regression table ---
-if (knitr::is_html_output()) {
-  export_summs(
-    model_runrate, model_wickets, model_margin, model_allrounder,
-    model.names = c(
-      "Run Rate",
-      "Wickets/Over",
-      "Match Margin",
-      "All-rounders/Match"
-    ),
-    error_format = "CIs: [{conf.low}, {conf.high}]",
-    digits = 3,
-    coefs = c("Impact Player Rule (Post)" = "post",
-              "Intercept" = "(Intercept)")
+# Function: to extract ATE and CIs cleanly
+get_ate <- function(model, outcome_label) {
+  ci <- confint(model)["post", ]
+  tibble(
+    outcome    = outcome_label,
+    ATE        = round(coef(model)["post"], 3),
+    CI_lower   = round(ci[1], 3),
+    CI_upper   = round(ci[2], 3),
+    CI_range   = glue("[{round(ci[1],3)}, {round(ci[2],3)}]")
   )
-} else {
-  cat("\n=== Model 1: Run Rate ===\n"); print(model_runrate_robust)
-  cat("\n=== Model 2: Wickets/Over ===\n"); print(model_wickets_robust)
-  cat("\n=== Model 3: Match Margin ===\n"); print(model_margin_robust)
-  cat("\n=== Model 4: All-rounders/Match ===\n"); print(model_allrounder_robust)
 }
+
+ate_table <-
+  bind_rows(
+    get_ate(model_runrate,    "Run Rate (per over)"),
+    get_ate(model_wickets,    "Wickets per Over"),
+    get_ate(model_margin,     "Match Margin (runs)"),
+    get_ate(model_allrounder, "All-rounders per Match")
+  )
+
+cat("\n========== ATE: IPL Before vs After Impact Player Rule ==========\n")
+print(ate_table)
+cat("\nHow to read:\n")
+cat("ATE      = average change in outcome post-rule vs pre-rule\n")
+cat("CI range = 95% confidence interval\n")
+cat("Note: This is a simple A-B comparison — not causal.\n")
+cat("      Causal identification via Synthetic Control in IPL_02_SyntheticControl Script\n")
+cat("=================================================================\n")
 
 ## ---- 3.5 Model Validity ----
 ###--------------------------------------------------------------------------###
 ###   SECTION 3.5: Parallel Trends Check                                     ###
-###   Required assumption for DiD validity                                   ###
+###   Required assumption check for DiD validity                             ###
 ###--------------------------------------------------------------------------###
 
 # Pre-trend: was run rate already rising before 2023?
@@ -353,8 +342,8 @@ fig4_allrounders <-
   theme_ipl() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5))
 
-### --- Fig 5: Parallel Trends Check ----
-fig5_parallel <-
+### --- Fig 5: Parallel Trends Check (simple) ----
+fig5_parallel_only_ipl <-
   season_run_rate %>%
   ggplot(aes(x = season_yr, y = run_rate, 
              color = post_factor, group = 1)) +
@@ -375,7 +364,7 @@ fig5_parallel <-
            color = "#CE1141", size = 3, fontface = "italic") +
   labs(
     title    = "Parallel Trends Check — Run Rate Pre vs Post Impact Player Rule",
-    subtitle = "Dotted line shows pre-period trend extrapolated forward",
+    subtitle = "Dotted line shows pre-period trend extrapolated forward. But this is merely what is...",
     x = "Season", y = "Run Rate (per over)", color = "Era",
     caption  = "Data: Cricsheet via cricketdata R package"
   ) +
@@ -387,48 +376,153 @@ print(fig1_runrate)
 print(fig2_wickets)
 print(fig3_balance)
 print(fig4_allrounders)
-print(fig5_parallel)
+print(fig5_parallel_only_ipl)
 
+# Valid parallel trends checks with all leagues
+get_league_metrics <- function(competition, league_name) {
+  message(glue("Fetching {league_name}..."))
+  
+  bbb <- fetch_cricsheet(competition = competition, gender = "male", type = "bbb")
+  matches <- fetch_cricsheet(competition = competition, gender = "male", type = "match")
+  
+  clean_yr <- function(s) {
+    case_when(
+      str_detect(s, "/") ~ as.integer(str_extract(s, "^\\d{4}")),
+      TRUE ~ as.integer(s)
+    )
+  }
+  
+  bbb     <- bbb     %>% mutate(season_yr = clean_yr(season))
+  matches <- matches %>% mutate(season_yr = clean_yr(season))
+  
+  run_rate_df <-
+    bbb %>%
+    filter(!extra_ball) %>%
+    group_by(season_yr) %>%
+    summarise(
+      run_rate         = (sum(runs_off_bat, na.rm = TRUE) / n()) * 6,
+      wickets_per_over = (sum(wicket,       na.rm = TRUE) / n()) * 6,
+      .groups = "drop"
+    )
+  
+  allrounder_df <-
+    bbb %>%
+    group_by(match_id, season_yr) %>%
+    summarise(
+      batters = list(unique(striker)),
+      bowlers = list(unique(bowler)),
+      .groups = "drop"
+    ) %>%
+    mutate(n_allrounders = map2_int(batters, bowlers, ~ length(intersect(.x, .y)))) %>%
+    group_by(season_yr) %>%
+    summarise(avg_allrounders = mean(n_allrounders, na.rm = TRUE), .groups = "drop")
+  
+  margin_df <-
+    matches %>%
+    mutate(
+      winner_runs    = as.numeric(winner_runs),
+      winner_wickets = as.numeric(winner_wickets),
+      margin_runs = case_when(
+        !is.na(winner_runs)    ~ winner_runs,
+        !is.na(winner_wickets) ~ (10 - winner_wickets) * 10,
+        TRUE ~ NA_real_
+      )
+    ) %>%
+    group_by(season_yr) %>%
+    summarise(avg_margin = mean(margin_runs, na.rm = TRUE), .groups = "drop")
+  
+  run_rate_df %>%
+    left_join(allrounder_df, by = "season_yr") %>%
+    left_join(margin_df,     by = "season_yr") %>%
+    mutate(league = league_name)
+}
+
+ipl_metrics <- get_league_metrics("ipl", "IPL")
+bbl_metrics <- get_league_metrics("bbl", "BBL")
+psl_metrics <- get_league_metrics("psl", "PSL")
+cpl_metrics <- get_league_metrics("cpl", "CPL")
+
+# merge into one dataframe
+all_leagues <- bind_rows(ipl_metrics, 
+                         bbl_metrics, 
+                         psl_metrics, 
+                         cpl_metrics)
+
+# Parallel trends amongst all leagues 
+parallel_all_leagues <-
+  all_leagues %>%
+  mutate(
+    season_yr = case_when(
+      str_detect(season_yr, "/") ~ as.integer(str_extract(season_yr, "^\\d{4}")),
+      TRUE ~ as.integer(season_yr)
+    ),
+    league_type = if_else(league == "IPL", 
+                          "IPL (Treated)", 
+                          "Donor Leagues (Control)")
+  ) %>%
+  filter(season_yr >= 2015, season_yr <= 2025) %>%
+  group_by(season_yr, league, league_type) %>%
+  summarise(run_rate = mean(run_rate, na.rm = TRUE), .groups = "drop")
+
+### --- Fig 5b: Parallel Trends Check (Valid across all leagues) ----
+fig5b_parallel_all <-
+  parallel_all_leagues %>%
+  mutate(alpha_val = if_else(league_type == "IPL (Treated)", 
+                             1, 0.4)
+         ) %>%
+  ggplot(aes(x = season_yr, y = run_rate,
+             color = league_type, group = league,
+             linetype = league_type,
+             alpha = alpha_val)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  geom_vline(xintercept = 2022.5, linetype = "dashed",
+             color = "black", linewidth = 0.8) +
+  annotate("text", x = 2023.1, y = 7.2,
+           label = "Impact Player\nRule ->",
+           color = "#CE1141", size = 3, hjust = 0) +
+  scale_color_manual(values = c("IPL (Treated)"           = "#CE1141",
+                                "Donor Leagues (Control)" = "#17408B")) +
+  scale_linetype_manual(values = c("IPL (Treated)"           = "solid",
+                                   "Donor Leagues (Control)" = "dashed")) +
+  scale_alpha_identity() +
+  scale_x_continuous(breaks = seq(2015, 2025, by = 1)) +
+  labs(
+    title    = "Parallel Trends Check — IPL vs Donor Leagues",
+    subtitle = "Pre-2023 trends do not strictly satisfy parallel trends \n— justifying the Synthetic Control approach. What IF analysis...",
+    x = "Season", y = "Run Rate (per over)",
+    color = NULL, linetype = NULL,
+    caption = "Data: Cricsheet via cricketdata R package"
+  ) +
+  theme_ipl() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5)
+        )
+
+print(fig5_parallel_only_ipl)
+print(fig5b_parallel_all)
 
 # ---- 5. Report ----
 ###--------------------------------------------------------------------------###
-###   SECTION 5: Summary of Findings                                         ###
+###   SECTION 5: Summary of Findings — A-B (IPL Before vs After)            ###
+###   Note: Causal SC gaps reported in IPL_02_Synthetic_Control.R           ###
 ###--------------------------------------------------------------------------###
 
-cat("\n\n========== DiD RESULTS SUMMARY ==========\n")
+cat("\n========== ATE SUMMARY: IPL Before vs After Impact Player Rule ==========\n")
+print(ate_table)
 
-# Run rate effect
-rr_coef <- coef(model_runrate)["post"]
-rr_ci   <- confint(model_runrate)["post",]
-cat(glue("\nRun Rate: +{round(rr_coef,3)} runs/over post-rule",
-         " (95% CI: {round(rr_ci[1],3)} to {round(rr_ci[2],3)})\n"))
+cat("\n========== KEY OBSERVATIONS ==========\n")
+cat("1. Run rates increased post-rule (+1.3 runs/over)\n")
+cat("2. All-rounder usage declined (-1.2 per match)\n")
+cat("3. Competitive balance largely unchanged\n")
+cat("4. Parallel trends assumption not satisfied — see IPL_02 for SC\n")
 
-# Wickets effect
-wk_coef <- coef(model_wickets)["post"]
-wk_ci   <- confint(model_wickets)["post",]
-cat(glue("\nWickets/Over: {round(wk_coef,4)} post-rule",
-         " (95% CI: {round(wk_ci[1],4)} to {round(wk_ci[2],4)})\n"))
-
-# Margin effect
-mg_coef <- coef(model_margin)["post"]
-mg_ci   <- confint(model_margin)["post",]
-cat(glue("\nMatch Margin: {round(mg_coef,2)} runs post-rule",
-         " (95% CI: {round(mg_ci[1],2)} to {round(mg_ci[2],2)})\n"))
-
-# All-rounder effect
-ar_coef <- coef(model_allrounder)["post"]
-ar_ci   <- confint(model_allrounder)["post",]
-cat(glue("\nAll-rounders/Match: {round(ar_coef,3)} post-rule",
-         " (95% CI: {round(ar_ci[1],3)} to {round(ar_ci[2],3)})\n"))
-
-cat("\n==========================================\n")
-cat("Limitations:\n")
-cat("- Only 4 post-treatment seasons (2023-2026) — small post-period N\n")
-cat("- No control league for counterfactual (pure before/after)\n")
-cat("- Match margin proxy is imperfect\n")
-cat("- All-rounder proxy based on ball-by-ball batting+bowling participation\n")
-cat("==========================================\n")
-
+cat("\n========== LIMITATIONS (this script) ==========\n")
+cat("- Simple A-B comparison only — not causal\n")
+cat("- Only 3 post-treatment seasons (2023-2025)\n")
+cat("- All-rounder proxy based on batting + bowling participation per match\n")
+cat("- Match margin proxy combines runs and wickets — imperfect\n")
+cat("- Causal identification via Synthetic Control in IPL_02\n")
+cat("================================================\n")
 ###--------------------------------------------------------------------------###
 # ---- 6. Save RAM space into hardisk ----
 save.image("IPL_01_Causal_Results.RData")
