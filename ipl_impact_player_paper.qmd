@@ -264,7 +264,7 @@ The Indian Premier League introduced the Impact Player rule ahead of the 2023 se
 
 The Impact Player rule is cricket's most significant structural innovation since the introduction of the T20 format itself. Modelled loosely on baseball's designated hitter rule, it allows franchises to deploy an 11th specialist player after the toss— a pure batter to chase down a target, or an extra bowler to contain a dangerous lineup. Its proponents argue it increases entertainment value and gives coaches a meaningful tactical weapon. Its critics, including former Indian international Sanjay Manjrekar, contend that it has fundamentally altered team composition in ways the game's governing bodies did not anticipate.
 
-The Board of Control for Cricket in India (BCCI) announced in May 2026 that it would formally review the rule following the conclusion of the current season. This review represents a rare and time-sensitive policy window, yet no rigorous causal analysis exists to inform it. The only published study on the rule analyses a single season using descriptive statistics— insufficient to isolate the rule's causal effect from pre-existing trends in T20 scoring. This paper addresses that gap.
+The Board of Control for Cricket in India (BCCI) announced in May 2026 that it would formally review the rule following the conclusion of the current season [@indiatoday2026; @livemint2026]. This review represents a rare and time-sensitive policy window, yet no rigorous causal analysis exists to inform it. The only published study on the rule analyses a single season using descriptive statistics— insufficient to isolate the rule's causal effect from pre-existing trends in T20 scoring. This paper addresses that gap.
 
 # Background
 
@@ -280,7 +280,7 @@ Prior to 2023, cricket's substitution rules were limited to injury replacements 
 
 Former Indian international Sanjay Manjrekar identified the structural consequence:
 
-> "In Indian conditions, an Impact Sub batter has a far greater impact than an Impact Sub bowler... we are seeing pure batters like Ashutosh Sharma playing at number 8."— *Sportstar Insight Edge Podcast (2026)*
+> "In Indian conditions, an Impact Sub batter has a far greater impact than an Impact Sub bowler... we are seeing pure batters like Ashutosh Sharma playing at number 8."— *Sportstar Insight Edge Podcast (2026)* [@sportstar2026]
 
 This mechanism is particularly acute in Indian conditions— flat, dry pitches with minimal lateral movement mean an extra batter is almost always more valuable than an extra bowler. Crucially, this has an implication for our synthetic control: donor leagues operate in conditions where bowling Impact Players would be more viable, so our counterfactual represents a **conservative lower bound** on the true batting bias in Indian conditions.
 
