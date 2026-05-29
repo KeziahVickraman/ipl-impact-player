@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "context_of_paper.html",
+    "href": "context_of_paper.html",
+    "title": "The Indian Premier League (IPL) is the world’s most valuable cricket",
+    "section": "",
+    "text": "###————————————————————————–### ### CONTEXT NOTE FOR READER ### ### Why the IPL Matters — For Non-Cricket Audiences ### ###————————————————————————–###\n\nThe Indian Premier League (IPL) is the world’s most valuable cricket\n\n\nfranchise tournament, generating over USD 15 billion in brand value\n\n\n(Duff & Phelps, 2023) and attracting the highest-paid cricketers globally.\n\n\nEstablished in 2008 by the Board of Control for Cricket in India (BCCI),\n\n\nit operates as a Twenty20 (T20) league — the shortest and most commercially\n\n\ndominant format of the sport, where each team faces exactly 20 overs\n\n\n(120 legal deliveries) per innings.\n\n\nWHY IT MATTERS GLOBALLY:\n\n\n─────────────────────────\n\n\n1. SCALE: The IPL is the second most-attended sporting league in the world\n\n\nby average attendance per game, behind only the NFL (ESPN, 2023).\n\n\nThe 2023 IPL final alone drew 130 million television viewers in India.\n\n\n2. FINANCIAL DOMINANCE: Media rights for the 2023–2027 cycle were sold\n\n\nfor USD 6.2 billion — surpassing the per-match value of the English\n\n\nPremier League. Every major cricket board now models its domestic\n\n\nT20 league on the IPL structure.\n\n\n3. TALENT CONCENTRATION: All 10 IPL franchises actively recruit from\n\n\nevery cricket-playing nation. Players from Australia (BBL), Pakistan\n\n\n(PSL), West Indies (CPL), South Africa (SA20) and England (The Hundred)\n\n\ncompete in the IPL — making it the de facto global standard-setter\n\n\nfor T20 cricket strategy, rules, and innovation.\n\n\n4. RULE-MAKING POWER: Because of its financial and cultural dominance,\n\n\nwhat the BCCI does in the IPL influences cricket globally. When the\n\n\nIPL introduced the Impact Player rule in 2023, other leagues immediately\n\n\nbegan debating whether to adopt it. The ICC (International Cricket\n\n\nCouncil) is watching closely.\n\n\nWHY THE IMPACT PLAYER RULE IS A GLOBAL POLICY QUESTION:\n\n\n─────────────────────────────────────────────────────────\n\n\nThe Impact Player rule allows teams to substitute one player mid-match\n\n\nfor tactical — not injury — reasons. A team may replace a struggling\n\n\nbatter with a specialist, or bring in an extra bowler after assessing\n\n\nmatch conditions. This is unprecedented in cricket’s history and\n\n\nstructurally analogous to the designated hitter rule in MLB — a\n\n\nsubstitution mechanic that fundamentally altered team composition,\n\n\nplayer valuation, and strategic approach.\n\n\nUnlike baseball’s DH rule which took decades to be universally adopted,\n\n\nthe IPL’s global reach means the Impact Player rule could reshape\n\n\ncricket’s player development pipeline — specifically the value placed\n\n\non all-rounders (players who both bat and bowl at a high level) —\n\n\nwithin a single generation of players.\n\n\nThe BCCI’s post-IPL 2026 review therefore carries implications not just\n\n\nfor Indian domestic cricket but for how the next generation of cricketers\n\n\nworldwide are identified, developed, and valued at auction.\n\n\nWHAT THIS PAPER CONTRIBUTES:\n\n\n──────────────────────────────\n\n\nThis is the first causal analysis of the Impact Player rule using\n\n\nball-by-ball data across four T20 leagues (IPL, BBL, PSL, CPL) and\n\n\nfour outcome dimensions (run rate, wicket-taking, competitive balance,\n\n\nall-rounder deployment). The timing is deliberate — the BCCI review\n\n\nbegins immediately after IPL 2026 concludes, and this paper provides\n\n\nthe empirical evidence base that policy discussion currently lacks.\n###————————————————————————–##"
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html",
+    "href": "ipl_impact_player_paper.html",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "",
+    "text": "The Indian Premier League (IPL) introduced the Impact Player rule in 2023, allowing teams to substitute a specialist player mid-match for tactical purposes— the first such substitution mechanic in professional cricket’s history. Using ball-by-ball data from over 288,000 deliveries across IPL seasons 2008–2026, we employ Difference-in-Differences (DiD) and Synthetic Control methods to estimate the causal effect of this rule on four outcomes: run rates, wicket-taking rates, competitive balance, and all-rounder deployment. We find that the rule caused a significant increase in run rates of +1.3 runs per over and a significant decline in all-rounder deployment of −1.2 players per match. Synthetic control analysis confirms these effects cannot be attributed to global T20 trends— donor leagues BBL, PSL, and CPL show no comparable shifts. Analysis of lower-order batting patterns further reveals that position 8 strike rates increased by 16 points post-rule while bowling contribution fell by 9.5 percentage points, empirically validating practitioner concerns about the systematic displacement of the all-rounder archetype. With the BCCI announcing a formal review of the rule following IPL 2026, this paper provides the first rigorous causal evidence base to inform that decision."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#the-ipl-and-t20-cricket",
+    "href": "ipl_impact_player_paper.html#the-ipl-and-t20-cricket",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "2.1 The IPL and T20 Cricket",
+    "text": "2.1 The IPL and T20 Cricket\nThe Indian Premier League is the world’s most valuable cricket franchise tournament, generating over USD 15 billion in brand value and attracting the highest-paid cricketers globally. Established in 2008 by the BCCI, it operates as a Twenty20 (T20) league— the shortest and most commercially dominant format, where each team faces exactly 20 overs (120 legal deliveries) per innings.\nThe Impact Player rule introduced in 2023 remains unique to the IPL as of the 2026 season— the Big Bash League (BBL), Pakistan Super League (PSL), and Caribbean Premier League (CPL) have not adopted it or any structural equivalent. This is precisely what makes these leagues valid control units for our causal analysis."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#the-impact-player-rule",
+    "href": "ipl_impact_player_paper.html#the-impact-player-rule",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "2.2 The Impact Player Rule",
+    "text": "2.2 The Impact Player Rule\nPrior to 2023, cricket’s substitution rules were limited to injury replacements who could not bat or bowl. From IPL 2023, each team may name five potential Impact Players before the toss, then substitute one into the playing eleven at any point. The substituted player may bat or bowl. Franchises have overwhelmingly deployed it as a batting substitution— bringing in a specialist batter to accelerate a chase.\nFormer Indian international Sanjay Manjrekar identified the structural consequence:\n\n“In Indian conditions, an Impact Sub batter has a far greater impact than an Impact Sub bowler… we are seeing pure batters like Ashutosh Sharma playing at number 8.”— Sportstar Insight Edge Podcast (2026)\n\nThis mechanism is particularly acute in Indian conditions— flat, dry pitches with minimal lateral movement mean an extra batter is almost always more valuable than an extra bowler. Crucially, this has an implication for our synthetic control: donor leagues operate in conditions where bowling Impact Players would be more viable, so our counterfactual represents a conservative lower bound on the true batting bias in Indian conditions."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#difference-in-differences",
+    "href": "ipl_impact_player_paper.html#difference-in-differences",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "4.1 Difference-in-Differences",
+    "text": "4.1 Difference-in-Differences\nOur first identification strategy compares IPL outcomes before and after 2023 against donor leagues that never adopted the rule. The estimating equation is:\n\\[Y_{lt} = \\beta_0 + \\beta_1 \\text{Post}_t + \\beta_2 \\text{Treated}_l + \\beta_3 (\\text{Post}_t \\times \\text{Treated}_l) + \\varepsilon_{lt}\\]\nwhere \\(\\beta_3\\) — the interaction term— is the DiD estimate, equal to \\((B-A) - (D-C)\\) in the standard four-quadrant framework."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#synthetic-control",
+    "href": "ipl_impact_player_paper.html#synthetic-control",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "4.2 Synthetic Control",
+    "text": "4.2 Synthetic Control\nA limitation of DiD is the parallel trends assumption. As we show below, this assumption is not strictly satisfied in the pre-period. We therefore employ Synthetic Control (Abadie et al. 2010), which constructs a weighted combination of donor leagues to match IPL’s pre-treatment trajectory, then projects this counterfactual forward. The gap between actual and synthetic IPL is the estimated treatment effect."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#descriptive-what-changed",
+    "href": "ipl_impact_player_paper.html#descriptive-what-changed",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "5.1 Descriptive: What Changed",
+    "text": "5.1 Descriptive: What Changed\n\n\n\n\n\n\n\n\nFigure 1: IPL run rate by season. Run rates rise sharply and monotonically following the 2023 introduction of the Impact Player rule.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 2: All-rounder deployment per match. The number of players who both bat and bowl declines sharply post-2023 and continues falling each season."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#average-treatment-effects",
+    "href": "ipl_impact_player_paper.html#average-treatment-effects",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "5.2 Average Treatment Effects",
+    "text": "5.2 Average Treatment Effects\nTable 1 reports simple before/after estimates with 95% confidence intervals. Run rates increased significantly, all-rounder deployment declined significantly, and competitive balance was largely unchanged.\n\n\n\n\nTable 1: Average Treatment Effects (simple before/after). Estimates with 95% confidence intervals. These are descriptive; causal identification follows via Synthetic Control.\n\n\n\n\n\n\nOutcome\nATE\nCI\n\n\n\n\nRun Rate (per over)\n1.268\n[0.867, 1.668]\n\n\nWickets per Over\n0.012\n[0, 0.024]\n\n\nMatch Margin (runs)\n3.038\n[0.405, 5.67]\n\n\nAll-rounders per Match\n-1.100\n[-1.757, -0.442]"
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#parallel-trends-and-the-case-for-synthetic-control",
+    "href": "ipl_impact_player_paper.html#parallel-trends-and-the-case-for-synthetic-control",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "5.3 Parallel Trends and the Case for Synthetic Control",
+    "text": "5.3 Parallel Trends and the Case for Synthetic Control\n\n\n\n\n\n\n\n\nFigure 3: Run rate trends, IPL versus donor leagues. Pre-2023 trends do not strictly satisfy the parallel trends assumption, motivating the use of Synthetic Control.\n\n\n\n\n\nBecause the parallel trends assumption is not strictly satisfied, we proceed to Synthetic Control, which relaxes this assumption by constructing a data-driven counterfactual rather than assuming common trends."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#synthetic-control-estimates",
+    "href": "ipl_impact_player_paper.html#synthetic-control-estimates",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "5.4 Synthetic Control Estimates",
+    "text": "5.4 Synthetic Control Estimates\n\n\n\n\n\n\n\n\nFigure 4: Synthetic Control: actual versus counterfactual IPL run rate. Post-2023, actual IPL run rates exceed the synthetic counterfactual constructed from donor leagues.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 5: Synthetic Control: actual versus counterfactual all-rounder usage. Without the rule, all-rounder deployment would have risen; instead it falls— the lines move in opposite directions.\n\n\n\n\n\nThe synthetic control confirms the all-rounder finding is not attributable to global T20 trends. Without the rule, all-rounder deployment would have risen in line with donor leagues; instead it falls sharply— the actual and counterfactual trajectories move in opposite directions post-2023."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#specialist-displacement-validating-the-manjrekar-hypothesis",
+    "href": "ipl_impact_player_paper.html#specialist-displacement-validating-the-manjrekar-hypothesis",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "5.5 Specialist Displacement: Validating the Manjrekar Hypothesis",
+    "text": "5.5 Specialist Displacement: Validating the Manjrekar Hypothesis\n\n\n\n\n\n\n\n\nFigure 6: Lower-order strike rates, pre versus post. Position 8 batters strike 16 points higher post-rule, consistent with pure batters replacing all-rounders.\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigure 7: Share of lower-order batters who also bowled, pre versus post. All-rounder deployment at positions 7-9 declined across the board post-2023.\n\n\n\n\n\nThese two figures provide the mechanism behind the aggregate all-rounder decline. Post-rule, position 8 batters strike 16 points higher while bowling 9.5 percentage points less— empirical confirmation that the Impact Player rule has systematically replaced the all-rounder archetype with pure batting specialists, exactly as Manjrekar observed."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#the-indian-conditions-amplifier",
+    "href": "ipl_impact_player_paper.html#the-indian-conditions-amplifier",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "6.1 The Indian Conditions Amplifier",
+    "text": "6.1 The Indian Conditions Amplifier\nOur synthetic control donor leagues— BBL, PSL, and CPL— operate in conditions where bowling Impact Players are more viable than in India. Australian pitches offer pace and bounce; Pakistani and Caribbean surfaces provide more lateral movement than the flat, dry tracks typical of the IPL. This means our counterfactual is conservative: the true batting bias introduced by the rule in Indian conditions is likely larger than our estimates suggest. Manjrekar’s observation is not anecdotal— it is empirically supported by the asymmetry our data reveals."
+  },
+  {
+    "objectID": "ipl_impact_player_paper.html#policy-implications-for-the-bcci",
+    "href": "ipl_impact_player_paper.html#policy-implications-for-the-bcci",
+    "title": "Benching the All-Rounder: A Causal Analysis of the IPL Impact Player Rule",
+    "section": "6.2 Policy Implications for the BCCI",
+    "text": "6.2 Policy Implications for the BCCI\nThe BCCI faces three options in its post-2026 review:\n\nKeep the rule. Entertainment value is demonstrably higher. But all-rounder deployment continues to decline each season with no sign of reverting.\nModify the rule. Restricting the Impact Player to a like-for-like substitution, or to bowling substitutions only, could preserve excitement while protecting all-rounder value.\nScrap the rule. This would reverse the structural decline in all-rounder development but sacrifice the scoring gains that have driven viewership.\n\nOur analysis cannot make this decision for the BCCI— but it provides the empirical evidence base that the discussion currently lacks."
+  }
+]

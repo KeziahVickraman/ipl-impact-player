@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "IPL Impact Player Analysis"
+  navbar:
+    right:
+      - text: "Paper"
+        href: ipl_impact_player_paper.qmd
+      - icon: github
+        href: https://github.com/KeziahVickraman/ipl-impact-player
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true
